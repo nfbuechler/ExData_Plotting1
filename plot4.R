@@ -11,6 +11,7 @@ datetime <- paste(select[,"Date"],select[,"Time"])
 #put date and time colunms together
 datefix <- cbind(datetime, select[,c(-1,-2)])
 #bind new datetime column to old columns, ommitting original date and time columns
+datefix$datetime <- strptime(datefix$datetime, "%d/%m/%Y %H:%M:%S")
 par(mfrow = c(2, 2), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0))
 with(datefix, {
   #1 (plot2)

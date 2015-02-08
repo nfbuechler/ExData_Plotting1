@@ -11,12 +11,13 @@ datetime <- paste(select[,"Date"],select[,"Time"])
 #put date and time colunms together
 datefix <- cbind(datetime, select[,c(-1,-2)])
 #bind new datetime column to old columns, ommitting original date and time columns
-
+datefix$datetime <- strptime(datefix$datetime, "%d/%m/%Y %H:%M:%S")
+par(mfrow = c(1,1))
 plot(datefix$datetime, datefix$Sub_metering_1 , type = "l", main = "Plot 3", xlab = "", ylab = "Energy sub metering")
 lines(datefix$datetime, datefix$Sub_metering_2, col = "red", type = "l")
 lines(datefix$datetime, datefix$Sub_metering_3, col = "blue", type = "l")
 legend("topright", pch = "l", col = c( "black", "blue", "red"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-#need to correct datetime 
+
 
 dev.copy(png, file = "plot3.png")
 dev.off()
